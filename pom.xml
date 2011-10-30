@@ -7,7 +7,7 @@
     <groupId>com.force.sdk.streaming</groupId>
     <artifactId>streaming</artifactId>
     <packaging>jar</packaging>
-    <version>0.12</version>
+    <version>0.13</version>
 
     <properties>
         <force.api.version>22.0.0</force.api.version>

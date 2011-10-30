@@ -7,6 +7,7 @@ import com.force.sdk.streaming.exception.ForceStreamingException;
 import com.force.sdk.streaming.util.ForceStreamingResource;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.sforce.ws.ConnectionException;
 import org.eclipse.jetty.client.HttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 
 /**
@@ -54,8 +56,9 @@ public class ForceStreamingClientModule extends AbstractModule {
     }
 
     @Provides
-    ForceServiceConnector provideConnector() throws IOException {
-        return new ForceServiceConnector(connectionName);
+    ForceServiceConnector provideConnector() throws IOException, ConnectionException {
+        ForceServiceConnector connector = new ForceServiceConnector(connectionName);
+        return connector;
     }
 
     // TODO: client.start() could potentially have some side effects.
@@ -73,13 +76,11 @@ public class ForceStreamingClientModule extends AbstractModule {
     }
 
     @Provides
-    String provideBaseUrl() throws ForceStreamingException, IOException {
-        Map<ForceConnectionProperty, String> connectionProperties = ForceConnectorUtils.loadConnectorPropsFromName(connectionName);
-        if (connectionProperties == null || !connectionProperties.containsKey(ForceConnectionProperty.ENDPOINT))
-            throw new ForceStreamingException("Unable to find connection named " + connectionName);
+    String provideBaseUrl() throws ForceStreamingException, IOException, ConnectionException {
+        ForceServiceConnector connector = provideConnector();
+        URL endpoint = new URL(connector.getConnection().getConfig().getServiceEndpoint());
 
-        String baseUrl = ForceStreamingResource.PROTOCOL.getValue() + "://"
-                + connectionProperties.get(ForceConnectionProperty.ENDPOINT);
+        String baseUrl = ForceStreamingResource.PROTOCOL.getValue() + "://" + endpoint.getHost();
         baseUrl += ForceStreamingResource.RESOURCE_ENDPOINT.getValue();
         LOGGER.debug("Providing base URL: " + baseUrl);
         return baseUrl;
