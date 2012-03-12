@@ -48,10 +48,10 @@
             <url>https://github.com/naamannewbold/repo/raw/master/snapshots</url>
         </snapshotRepository>
 
-        <!--<repository>-->
-            <!--<id>repo</id>-->
-            <!--<url>https://github.com/naamannewbold/repo/raw/master/releases</url>-->
-        <!--</repository>-->
+        <repository>
+            <id>repo</id>
+            <url>https://github.com/naamannewbold/repo/raw/master/releases</url>
+        </repository>
 
         <repository>
             <id>heroku-library</id>
