@@ -53,10 +53,6 @@
             <url>https://github.com/naamannewbold/repo/raw/master/releases</url>
         </repository>
 
-        <repository>
-            <id>heroku-library</id>
-            <url>${env.LIBRARY_URL}</url>
-        </repository>
     </distributionManagement>
     <dependencies>
         <!-- cometd -->
