@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
  */
 public class ForceStreamingServiceTest extends AbstractForceStreamingServiceTest {
 
-    @Test
+    @Test(enabled = false)
     public void testStreamingService() {
 //        ForceStreamingService stream = new ForceStreamingService(bayeux);
 //        stream.processForce();

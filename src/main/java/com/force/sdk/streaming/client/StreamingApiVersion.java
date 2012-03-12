@@ -6,7 +6,8 @@ package com.force.sdk.streaming.client;
 public enum StreamingApiVersion {
     V22 (22.0),
     V23 (23.0),
-    LATEST (V23.version);
+    V24 (24.0),
+    LATEST (V24.version);
 
     public double version;
 

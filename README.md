@@ -11,7 +11,7 @@ The following instructions assume some knowledge of the Force.com platform.  If 
         <dependency>
             <groupId>com.force.sdk.streaming</groupId>
             <artifactId>streaming</artifactId>
-            <version>0.12</version>
+            <version>0.13</version>
         </dependency>
 ```
 
@@ -58,7 +58,7 @@ Add this dependency to your pom.xml
         <dependency>
             <groupId>com.force.sdk.streaming</groupId>
             <artifactId>streaming</artifactId>
-            <version>0.11</version>
+            <version>0.13</version>
         </dependency>
 ```
 

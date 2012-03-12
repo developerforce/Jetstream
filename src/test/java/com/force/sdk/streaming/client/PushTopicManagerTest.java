@@ -33,6 +33,9 @@ public class PushTopicManagerTest {
     @BeforeMethod
     public void clearEntityManager() {
         pushTopicManager.em.clear();
+      if (pushTopicManager.em.getTransaction().isActive()) {
+        pushTopicManager.em.getTransaction().rollback();
+      }
     }
 
     /*
@@ -91,8 +94,8 @@ public class PushTopicManagerTest {
      */
     @Test
     public void testStandardPushTopicValuesCopied() {
-        PushTopic source = new PushTopic("source", StreamingApiVersion.V22.version, "Select Id From Source", "source");
-        PushTopic destination = new PushTopic("dest", StreamingApiVersion.V23.version, "Select Id From Dest", "dest");
+        PushTopic source = new PushTopic("source", StreamingApiVersion.V23.version, "Select Id From Source", "source");
+        PushTopic destination = new PushTopic("dest", StreamingApiVersion.V24.version, "Select Id From Dest", "dest");
         pushTopicManager.copyStandardValues(source, destination);
         Assert.assertEquals(destination.getName(), "source");
         Assert.assertEquals(destination.getApiVersion(), StreamingApiVersion.V22.version);
@@ -118,7 +121,7 @@ public class PushTopicManagerTest {
         PushTopic pushTopic = new PushTopic();
         pushTopic.setApiVersion(StreamingApiVersion.LATEST.version);
         pushTopic.setName(topicName);
-        pushTopic.setQuery("Select Id From Account");
+        pushTopic.setQuery("Select Id, Name From Account");
         return pushTopic;
     }
 }
