@@ -160,10 +160,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-servlet</artifactId>
-            <version>${eclipse.jetty.version}</version>
-            <scope>test</scope>
+           <groupId>org.eclipse.jetty</groupId>
+           <artifactId>jetty-server</artifactId>
+           <version>[9.3.24.v20180605,)</version>
         </dependency>
 
         <!-- Logging -->
